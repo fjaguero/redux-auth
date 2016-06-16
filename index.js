@@ -10,7 +10,7 @@ import quotesApp from './reducers'
 // Routing
 import thunkMiddleware from 'redux-thunk'
 import api from './middleware/api'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, hashHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 // Components
@@ -21,17 +21,13 @@ let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, api)(createStor
 let store = createStoreWithMiddleware(quotesApp, window.devToolsExtension ? window.devToolsExtension() : f => f)
 
 // Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store)
+// const history = syncHistoryWithStore(browserHistory, store)
 
 let rootElement = document.getElementById('root')
 
-var createElement = function (Component, props) {
-  return <Component store={store} {...props} />
-};
-
 render(
   <Provider store={store}>
-      <Router history={browserHistory} reateElement={createElement}>
+      <Router history={hashHistory} >
         <Route path="/" component={App}>
             <Route path="/tasks" component={Tasks}  />
         </Route>

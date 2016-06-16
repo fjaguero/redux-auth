@@ -1,6 +1,6 @@
 // The middleware to call the API for quotes
 import { CALL_API } from './middleware/api'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 
 // There are three possible states for our login
@@ -88,7 +88,7 @@ export function loginUser(creds) {
         else {
           // If login was successful, set the token in local storage and move the user to
           localStorage.setItem('id_token', user.id_token)
-          browserHistory.replace('/tasks')
+          hashHistory.push('/tasks')
 
           // Dispatch the success action
           dispatch(receiveLogin(user))

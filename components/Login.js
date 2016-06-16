@@ -10,8 +10,7 @@ export default class Login extends Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
-    this.onLoginClick()
+    e.preventDefault();
   }
 
   render() {
