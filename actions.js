@@ -132,3 +132,19 @@ export function fetchSecretQuote() {
     }
   }
 }
+
+
+export const MITS_REQUEST = 'MITS_REQUEST'
+export const MITS_SUCCESS = 'MITS_SUCCESS'
+export const MITS_FAILURE = 'MITS_FAILURE'
+
+
+export function fetchMits() {
+  return {
+    [CALL_API]: {
+      endpoint: 'mits',
+      authenticated: true,
+      types: [MITS_REQUEST, MITS_SUCCESS, MITS_FAILURE]
+    }
+  }
+}
