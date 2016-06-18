@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS,
-  QUOTE_REQUEST, QUOTE_SUCCESS, QUOTE_FAILURE
+  QUOTE_REQUEST, QUOTE_SUCCESS, QUOTE_FAILURE,
+  MITS_REQUEST, MITS_SUCCESS
 } from './actions'
 
 import { routerReducer } from 'react-router-redux'
@@ -68,12 +69,35 @@ function quotes(state = {
   }
 }
 
+// The MITS reducer
+function mits(state = {
+    isFetching: false,
+    mits: '',
+    authenticated: false
+  }, action) {
+  switch (action.type) {
+    case MITS_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case MITS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        mits: JSON.parse(action.response),
+        authenticated: action.authenticated || false
+      })
+    default:
+      return state
+  }
+}
+
 // We combine the reducers here so that they
 // can be left split apart above
 const quotesApp = combineReducers({
   auth,
   quotes,
-   routing: routerReducer
+  mits,
+  routing: routerReducer
 })
 
 export default quotesApp
