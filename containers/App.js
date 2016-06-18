@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar'
 class App extends Component {
 
   render() {
-    const { dispatch, quote, isAuthenticated, errorMessage, isSecretQuote } = this.props
+    const { dispatch, quote, mits, isAuthenticated, errorMessage, isSecretQuote } = this.props
 
     const childrenWithProps = React.Children.map(this.props.children,
         (child) => React.cloneElement(child, {
@@ -31,6 +31,7 @@ class App extends Component {
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
   quote: PropTypes.string,
+  mits: PropTypes.object,
   isAuthenticated: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string,
   isSecretQuote: PropTypes.bool.isRequired
@@ -38,12 +39,13 @@ App.propTypes = {
 
 function mapStateToProps(state) {
 
-  const { quotes, auth } = state
+  const { quotes, auth, mits } = state
   const { quote, authenticated } = quotes
   const { isAuthenticated, errorMessage } = auth
 
   return {
     quote,
+    mits,
     isSecretQuote: authenticated,
     isAuthenticated,
     errorMessage
